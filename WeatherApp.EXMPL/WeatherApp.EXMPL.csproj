@@ -6,4 +6,83 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="IMG\ICONS\01d@2x.png" />
+      <Resource Include="IMG\ICONS\01d@2x.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\ICONS\01n@2x.png" />
+      <Resource Include="IMG\ICONS\01n@2x.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\ICONS\02d@2x.png" />
+      <Resource Include="IMG\ICONS\02d@2x.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\ICONS\02n@2x.png" />
+      <Resource Include="IMG\ICONS\02n@2x.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\ICONS\03d@2x.png" />
+      <Resource Include="IMG\ICONS\03d@2x.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\ICONS\03n@2x.png" />
+      <Resource Include="IMG\ICONS\03n@2x.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\ICONS\04d@2x.png" />
+      <Resource Include="IMG\ICONS\04d@2x.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\ICONS\04n@2x.png" />
+      <Resource Include="IMG\ICONS\04n@2x.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\ICONS\09d@2x.png" />
+      <Resource Include="IMG\ICONS\09d@2x.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\ICONS\09n@2x.png" />
+      <Resource Include="IMG\ICONS\09n@2x.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\ICONS\10d@2x.png" />
+      <Resource Include="IMG\ICONS\10d@2x.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\ICONS\10n@2x.png" />
+      <Resource Include="IMG\ICONS\10n@2x.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\ICONS\11d@2x.png" />
+      <Resource Include="IMG\ICONS\11d@2x.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\ICONS\11n@2x.png" />
+      <Resource Include="IMG\ICONS\11n@2x.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\ICONS\13d@2x.png" />
+      <Resource Include="IMG\ICONS\13d@2x.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\ICONS\13n@2x.png" />
+      <Resource Include="IMG\ICONS\13n@2x.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\ICONS\50d@2x.png" />
+      <Resource Include="IMG\ICONS\50d@2x.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\ICONS\50n@2x.png" />
+      <Resource Include="IMG\ICONS\50n@2x.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+    </ItemGroup>
+
 </Project>
