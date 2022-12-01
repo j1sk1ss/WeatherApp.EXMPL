@@ -8,10 +8,10 @@ using WeatherApp.EXMPL.DATA;
 
 namespace WeatherApp.EXMPL.GUI {
     public static class City {
-        public static Grid GetCity(CityInfo cityInfo, WeatherInfo weatherInfo, MainWindow mainWindow) { // Gets info from api class, and gets main form
+        public static Grid GetCity(CityInfo cityInfo, WeatherInfo weatherInfo, MainWindow mainWindow) {
             var cityGrid = new Grid {
                 VerticalAlignment = VerticalAlignment.Top,
-                Height = 100,
+                Height   = 100,
                 Children = {
                     new Line {
                         X1 = 0,
@@ -29,17 +29,17 @@ namespace WeatherApp.EXMPL.GUI {
                     },
                     new Label {
                         FontSize = 20,
-                        Content  = cityInfo.name // from api class
+                        Content  = cityInfo.local_names.ru
                     },
                     new Label {
                         FontSize = 15,
                         Margin   = new Thickness(0,50,0,0),
-                        Content  = Math.Round(weatherInfo.list[0].main.temp_max, 0) + "°" // from api class
+                        Content  = Math.Round(weatherInfo.list[0].main.temp_max, 0) + "°"
                     },
                     new Label {
                         FontSize = 14,
                         Margin   = new Thickness(0,70,0,0),
-                        Content  = Math.Round(weatherInfo.list[0].main.temp_min, 0) + "°" // from api class
+                        Content  = Math.Round(weatherInfo.list[0].main.temp_min, 0) + "°"
                     },
                     new Image {
                         Height  = 50,
@@ -47,18 +47,33 @@ namespace WeatherApp.EXMPL.GUI {
                         Stretch = Stretch.Fill,
                         Margin  = new Thickness(100,0,0,50),
                         Source  = new BitmapImage(new Uri($"IMG/ICONS/{weatherInfo.list[0].weather[0].icon}@2x.png",
-                            UriKind.Relative)) // from api class
+                            UriKind.Relative)) 
                     }
                 }
             };
             var extendButton = new Button {
-                Width = 25,
-                HorizontalAlignment = HorizontalAlignment.Right,
+                HorizontalAlignment = HorizontalAlignment.Right,                
+                Width   = 25,
                 Content = ">",
-                Name = "button_" + mainWindow.Cities.Children.Count
+                Name    = "button_" + mainWindow.Cities.Children.Count
             };
             extendButton.Click += mainWindow.ViewInfo;
             cityGrid.Children.Add(extendButton);
+            
+            extendButton = new Button {
+                Width  = 25,
+                Height = 25,
+                Margin = new Thickness(35,0,0,0),
+                
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment   = VerticalAlignment.Bottom,
+                
+                Content = "-",
+                Name    = "delete_" + mainWindow.Cities.Children.Count
+            };
+            extendButton.Click += mainWindow.DeleteCity;
+            cityGrid.Children.Add(extendButton);
+            
             return cityGrid;
         }
     }

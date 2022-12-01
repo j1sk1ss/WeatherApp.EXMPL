@@ -7,13 +7,13 @@ using Newtonsoft.Json;
 using WeatherApp.EXMPL.DATA;
 
 namespace WeatherApp.EXMPL.WINDOWS {
-    public partial class AddCity : Window {
+    public partial class AddCity {
         private const string ApiKey = "d3e8c8e06baab4f0fabcbee86a29c51b";
         public AddCity(MainWindow mainWindow) {
             InitializeComponent();
             MainWindow = mainWindow;
         }
-        private MainWindow MainWindow { get; set; }
+        private MainWindow MainWindow { get; }
         private async void SendCityInfo(object sender, RoutedEventArgs e) {
             try {
                 var locationRequest    = 
@@ -22,8 +22,8 @@ namespace WeatherApp.EXMPL.WINDOWS {
                 var locationResponse   = await locationWebRequest.GetResponseAsync();
                 
                 string location;
-                
-                using (var stream = locationResponse.GetResponseStream()) {
+
+                await using (var stream = locationResponse.GetResponseStream()) {
                     using (var reader = new StreamReader(stream!)) {
                         location = await reader.ReadToEndAsync();
                     };
@@ -39,9 +39,9 @@ namespace WeatherApp.EXMPL.WINDOWS {
                 var weatherWebRequest  = WebRequest.Create(weatherRequest);                
                 var weatherResponse    = await weatherWebRequest.GetResponseAsync();    
                 
-                string weather;     
-                
-                using (var stream = weatherResponse.GetResponseStream()) {
+                string weather;
+
+                await using (var stream = weatherResponse.GetResponseStream()) {
                     using (var reader = new StreamReader(stream!)) {
                         weather = await reader.ReadToEndAsync();
                     };
@@ -49,7 +49,9 @@ namespace WeatherApp.EXMPL.WINDOWS {
                 
                 weatherResponse.Close();
                 
-                MainWindow.UserCities.Add(locationData, JsonConvert.DeserializeObject<WeatherInfo>(weather));
+                MainWindow.CitiesInfo.Add(locationData);
+                MainWindow.WeathersInfo.Add(JsonConvert.DeserializeObject<WeatherInfo>(weather));
+                
                 MainWindow.UpdateInformation();
                 Close();
             }

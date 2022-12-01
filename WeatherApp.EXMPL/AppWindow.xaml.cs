@@ -10,32 +10,49 @@ using WeatherApp.EXMPL.GUI;
 using City = WeatherApp.EXMPL.GUI.City;
 
 namespace WeatherApp.EXMPL {
-
-    public partial class MainWindow : Window {
-        private const string DataLocation = "Cities.json";
+    public partial class MainWindow {
+        private const string CityDataLocation    = "Cities.json";
+        private const string WeatherDataLocation = "Weathers.json";
         
         public MainWindow() {
             InitializeComponent();
-            UserCities = new Dictionary<CityInfo, WeatherInfo>();
-            if (!File.Exists(DataLocation)) return;
+            
+            CitiesInfo   = new List<CityInfo>();
+            WeathersInfo = new List<WeatherInfo>();
+            
+            if (!File.Exists(CityDataLocation)) return;
+            if (!File.Exists(WeatherDataLocation)) return;
             
             try {
-                UserCities = JsonConvert.DeserializeObject<UserData>(File.ReadAllText(DataLocation))!.UserCities;
+                CitiesInfo   = JsonConvert.DeserializeObject<List<CityInfo>>(File.ReadAllText(CityDataLocation));
+                WeathersInfo = JsonConvert.DeserializeObject<List<WeatherInfo>>(File.ReadAllText(WeatherDataLocation));
+                UpdateInformation();
             }
             catch (Exception exception) {
                 MessageBox.Show($"{exception}");
             }
         }
-        public Dictionary<CityInfo, WeatherInfo> UserCities { get; set; }
-        private void AddCity(object sender, RoutedEventArgs e) {
-            new WINDOWS.AddCity(this).Show();
-        }
+        
+        public List<CityInfo> CitiesInfo { get; }
+        public List<WeatherInfo> WeathersInfo { get; }
+        
         public void ViewInfo(object sender, RoutedEventArgs routedEventArgs) {
             try {
                 FullInfo.Children.Clear();
                 var position = int.Parse((sender as Button)!.Name.Split("_")[1]);
-                FullInfo.Children.Add(ExtendedCity.GetExtendedCityBody(UserCities.Keys.ToList()[position],
-                    UserCities[UserCities.Keys.ToList()[position]]));
+                FullInfo.Children.Add(ExtendedCity.GetExtendedCityBody(CitiesInfo[position],
+                    WeathersInfo[position]));
+            }
+            catch (Exception e) {
+                MessageBox.Show($"{e}");
+            }
+        }
+        public void DeleteCity(object sender, RoutedEventArgs routedEventArgs) {
+            try {
+                var position = int.Parse((sender as Button)!.Name.Split("_")[1]);
+                CitiesInfo.RemoveAt(position);
+                WeathersInfo.RemoveAt(position);
+                UpdateInformation();
             }
             catch (Exception e) {
                 MessageBox.Show($"{e}");
@@ -44,9 +61,8 @@ namespace WeatherApp.EXMPL {
         public void UpdateInformation() {
             try {
                 Cities.Children.Clear();
-                for (var i = 0; i < UserCities.Count; i++) {
-                    Cities.Children.Add(City.GetCity(UserCities.Keys.ToList()[i],
-                        UserCities[UserCities.Keys.ToList()[i]], this));
+                for (var i = 0; i < CitiesInfo.Count; i++) {
+                    Cities.Children.Add(City.GetCity(CitiesInfo[i], WeathersInfo[i], this));
                     (Cities.Children[^1] as Grid)!.Margin = new Thickness(0,i * 100,0,0);
                 }
             }
@@ -54,13 +70,14 @@ namespace WeatherApp.EXMPL {
                 MessageBox.Show($"{e}");
             }
         }
-
+        private void AddCity(object sender, RoutedEventArgs e) {
+            new WINDOWS.AddCity(this).Show();
+        }
+        
         private void SaveData(object sender, EventArgs e) {
             try {
-                var tempData = new UserData {
-                    UserCities = UserCities
-                };
-                File.WriteAllText(DataLocation, JsonConvert.SerializeObject(tempData));
+                File.WriteAllText(CityDataLocation, JsonConvert.SerializeObject(CitiesInfo, Formatting.Indented));
+                File.WriteAllText(WeatherDataLocation, JsonConvert.SerializeObject(WeathersInfo, Formatting.Indented));
             }
             catch (Exception exception) {
                 MessageBox.Show($"{exception}");

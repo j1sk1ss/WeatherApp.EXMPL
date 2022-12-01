@@ -7,31 +7,36 @@ using WeatherApp.EXMPL.DATA;
 
 namespace WeatherApp.EXMPL.GUI {
     public static class ExtendedCity {
-        public static Grid GetExtendedCityBody(CityInfo cityInfo, WeatherInfo weatherInfo) { // gets api class
+        public static Grid GetExtendedCityBody(CityInfo cityInfo, WeatherInfo weatherInfo) { 
             var extendedBodyGrid = new Grid {
                 Children = {
                     new Label {
                         FontSize = 30,
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        Content = $"{cityInfo.local_names.ru}" 
+                        Content  = $"{cityInfo.local_names.ru}",    
+                        
+                        HorizontalAlignment = HorizontalAlignment.Center
                     },
                     new Label {
                         FontSize = 20,
-                        Margin = new Thickness(0,50,0,0),
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        Content = $"Время: {DateTime.UtcNow.AddHours(weatherInfo.city.timezone / 3600f):HH:mm}"
+                        Margin   = new Thickness(0,50,0,0),
+                        Content  = $"Время: {DateTime.UtcNow.AddHours(weatherInfo.city.timezone / 3600f):HH:mm}",  
+                        
+                        HorizontalAlignment = HorizontalAlignment.Center
                     },
                     new Label {
                         FontSize = 20,
-                        Margin = new Thickness(0,70,0,0),
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        Content = $"Температура: {Math.Round(weatherInfo.list[0].main.temp, 0)}°" 
+                        Margin   = new Thickness(0,70,0,0),
+                        Content  = $"Температура: {Math.Round(weatherInfo.list[0].main.temp, 0)}°",  
+                        
+                        HorizontalAlignment = HorizontalAlignment.Center
                     },
                     new Label {
                         FontSize = 15,
-                        Margin = new Thickness(0,95,0,0),
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        Content = $"Скорость ветра: {weatherInfo.list[0].wind.speed} м/c" 
+                        Margin   = new Thickness(0,100,0,0),
+                        Content  = $"Скорость ветра: {weatherInfo.list[0].wind.speed} м/c" + 
+                                   $"\nТемпература по ощущению: {Math.Round(weatherInfo.list[0].main.feels_like, 0)}°",  
+                        
+                        HorizontalAlignment = HorizontalAlignment.Left,
                     },
                 }
             };
@@ -57,10 +62,12 @@ namespace WeatherApp.EXMPL.GUI {
                 }
             };
 
+            const int indent = 80;
+            
             for (var i = 0; i < weatherInfo.list.Count; i++) {
                 var day = Day.GetDay(weatherInfo, i);
                 daysGrid.Children.Add(day);
-                (daysGrid.Children[^1] as Grid)!.Margin = new Thickness(i * 80,0,0,0);
+                (daysGrid.Children[^1] as Grid)!.Margin = new Thickness(i * indent,0,0,0);
             }
             
             extendedBodyGrid.Children.Add(daysGrid);
