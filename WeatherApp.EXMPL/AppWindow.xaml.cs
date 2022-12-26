@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Windows;
 using System.Windows.Controls;
 using Newtonsoft.Json;
 using WeatherApp.EXMPL.DATA;
 using WeatherApp.EXMPL.GUI;
+using WeatherApp.EXMPL.WINDOWS;
 using City = WeatherApp.EXMPL.GUI.City;
 
 namespace WeatherApp.EXMPL {
@@ -22,7 +24,7 @@ namespace WeatherApp.EXMPL {
             
             if (!File.Exists(CityDataLocation)) return;
             if (!File.Exists(WeatherDataLocation)) return;
-            
+            /*
             try {
                 CitiesInfo   = JsonConvert.DeserializeObject<List<CityInfo>>(File.ReadAllText(CityDataLocation));
                 WeathersInfo = JsonConvert.DeserializeObject<List<WeatherInfo>>(File.ReadAllText(WeatherDataLocation));
@@ -31,6 +33,7 @@ namespace WeatherApp.EXMPL {
             catch (Exception exception) {
                 MessageBox.Show($"{exception}");
             }
+            */
         }
         
         public List<CityInfo> CitiesInfo { get; }
@@ -65,13 +68,19 @@ namespace WeatherApp.EXMPL {
                     Cities.Children.Add(City.GetCity(CitiesInfo[i], WeathersInfo[i], this));
                     (Cities.Children[^1] as Grid)!.Margin = new Thickness(0,i * 100,0,0);
                 }
-            }
-            catch (Exception e) {
-                MessageBox.Show($"{e}");
+            }       
+            catch (Exception exp)
+            {
+                MessageBox.Show($"введенно некоректное название города. {exp}");
             }
         }
+
+        public AddCity addCity = null;
+
         private void AddCity(object sender, RoutedEventArgs e) {
-            new WINDOWS.AddCity(this).Show();
+            if (addCity != null) return;
+            addCity = new WINDOWS.AddCity(this);
+            addCity.Show();
         }
         
         private void SaveData(object sender, EventArgs e) {

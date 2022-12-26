@@ -12,7 +12,7 @@ namespace WeatherApp.EXMPL.GUI {
                 Children = {
                     new Label {
                         FontSize = 30,
-                        Content  = $"{cityInfo.local_names.ru}",    
+                        Content  = $"{cityInfo.name}",    
                         
                         HorizontalAlignment = HorizontalAlignment.Center
                     },

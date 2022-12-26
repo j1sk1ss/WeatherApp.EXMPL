@@ -83,6 +83,30 @@
       <Resource Include="IMG\ICONS\50n@2x.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
+      <None Remove="IMG\-.jpg" />
+      <Resource Include="IMG\-.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\67915641.6v6sp4kkya.W665-1500x1000.jpg" />
+      <Resource Include="IMG\67915641.6v6sp4kkya.W665-1500x1000.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\novyi-god-tekstura-fon-snezhinki-igrushki.jpg" />
+      <Resource Include="IMG\novyi-god-tekstura-fon-snezhinki-igrushki.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\photo-output.jpg" />
+      <Resource Include="IMG\photo-output.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\photo-output (2).jpg" />
+      <Resource Include="IMG\photo-output (2).jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\Безымянный-1_Монтажная область 1.jpg" />
+      <Resource Include="IMG\Безымянный-1_Монтажная область 1.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
 </Project>

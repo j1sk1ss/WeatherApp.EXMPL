@@ -7,8 +7,12 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Title="Погода" Height="450" Width="840"
-        Closed="SaveData">
+        Closed="SaveData"
+		>
     <Grid>
+		<Image Source="IMG/Безымянный-1_Монтажная область 1.jpg"
+			    Stretch="Fill"
+			   ></Image>
         <Grid x:Name = "MiniList">
             <Line X1="250" Y1="0"
                           X2 = "250" Y2 = "450"
